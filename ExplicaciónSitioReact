@@ -1,0 +1,5 @@
+Esta actividad tiene como propósito realizar una página web usando react, con react router es posible conectar páginas, proporcionando una página web de una sola página.
+Tenemos múltiples funciones siendo una de ellas main.jsx siendo el archivo con la intención de iniciar la función App, además de importar el css y js que se requiere de bootstrap
+mientras que el archivo App.jsx establece la estructura del sitio, usando la función Navbar que siempre estará visible y poder añadir apartados al sistema de rutas
+la función Navbar.jsx se usan las etiquetas "Link" que son del react para poder cargar el contenido instantáneamente y para ver de modo vista se utiliza la función del archivo Inicio.jsx
+también el pagina1.jsx que es para mostrar el contenido.
