@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explorador de Países - API RestCountries</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .header {
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .header h1 {
+      font-weight: bold;
+    }
+    .flag {
+      width: 55px;
+      height: 35px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+    .search-bar {
+      max-width: 400px;
+      margin: 30px auto;
+    }
+    .explicacion {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-top: 60px;
+    }
+    footer {
+      background-color: #e9ecef;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <div class="header">
+    <h1>Explorador de Países</h1>
+    <p>Visualiza información actualizada del mundo gracias a la API RestCountries</p>
+  </div>
+
+  <!-- Buscador -->
+  <div class="container">
+    <div class="search-bar input-group">
+      <span class="input-group-text bg-primary text-white">Buscar</span>
+      <input type="text" id="searchInput" class="form-control" placeholder="Ingresa el nombre de un país...">
+    </div>
+
+    <!-- Tabla de países -->
+    <div class="table-responsive mt-4">
+      <table class="table table-striped table-hover align-middle text-center">
+        <thead class="table-primary">
+          <tr>
+            <th>Bandera</th>
+            <th>Nombre</th>
+            <th>Capital</th>
+            <th>Población</th>
+            <th>Moneda</th>
+            <th>Idioma</th>
+          </tr>
+        </thead>
+        <tbody id="countryTable">
+          <tr>
+            <td colspan="6">
+              <div class="spinner-border text-primary" role="status"></div>
+              <p class="text-muted mt-2">Cargando países...</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Explicación del proyecto -->
+    <div class="explicacion">
+      <h3 class="fw-bold mb-3">Descripción General del Proyecto</h3>
+      <p>
+        El propósito de este sitio web es mostrar información relevante sobre los países del mundo 
+        utilizando la API pública <strong>RestCountries</strong>. Dicha API ofrece datos geográficos, demográficos 
+        y culturales de cada nación, lo que permite crear una herramienta educativa e informativa.
+      </p>
+
+      <p>
+        La dirección usada para obtener los datos es la siguiente:
+      </p>
+      <pre class="bg-light p-3 rounded">https://restcountries.com/v3.1/all?fields=name,flags,capital,currencies,languages,population</pre>
+
+      <h5 class="fw-semibold mt-4">Recursos Utilizados</h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>HTML5:</strong> estructura general del documento.</li>
+        <li class="list-group-item"><strong>Bootstrap 5:</strong> diseño visual moderno y adaptativo.</li>
+        <li class="list-group-item"><strong>JavaScript:</strong> conexión con la API y manipulación del contenido dinámico.</li>
+      </ul>
+
+      <h5 class="fw-semibold mt-4">Funcionamiento Técnico</h5>
+      <p>
+        Al cargar el sitio, un script realiza una solicitud a la API RestCountries utilizando la función <code>fetch()</code>.  
+        Los datos obtenidos se procesan para mostrar cada país dentro de una tabla con formato Bootstrap.  
+        En ella se despliegan su bandera, nombre, capital, población, moneda e idioma principal.
+      </p>
+
+      <p>
+        Adicionalmente, se incorporó una barra de búsqueda que permite filtrar los países de manera instantánea 
+        según el texto ingresado, facilitando la navegación entre los resultados.
+      </p>
+
+      <h5 class="fw-semibold mt-4">Conclusión</h5>
+      <p>
+        Este proyecto integra de manera práctica conceptos de consumo de APIs, manipulación del DOM y diseño responsivo.  
+        A través de un solo archivo HTML se demuestra cómo combinar Bootstrap y JavaScript para construir una aplicación web dinámica, 
+        útil y visualmente agradable sin requerir herramientas externas.
+      </p>
+    </div>
+  </div>
+
+  <!-- Pie de página -->
+  <footer>
+    <p class="text-muted mb-0">Proyecto web - API REST + Bootstrap + JavaScript</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- JavaScript principal -->
+  <script>
+    const API_URL = "https://restcountries.com/v3.1/all?fields=name,flags,capital,currencies,languages,population";
+    const tableBody = document.getElementById("countryTable");
+    const searchInput = document.getElementById("searchInput");
+    let countriesData = [];
+
+    async function cargarPaises() {
+      try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        countriesData = data;
+        mostrarPaises(data);
+      } catch (error) {
+        tableBody.innerHTML = "<tr><td colspan='6' class='text-danger'>Error al cargar los países.</td></tr>";
+      }
+    }
+
+    function mostrarPaises(paises) {
+      tableBody.innerHTML = "";
+      paises.forEach(pais => {
+        const moneda = pais.currencies ? Object.values(pais.currencies).map(m => m.name).join(", ") : "No disponible";
+        const idioma = pais.languages ? Object.values(pais.languages).join(", ") : "No disponible";
+        const capital = pais.capital ? pais.capital[0] : "No disponible";
+
+        const fila = `
+          <tr>
+            <td><img src="${pais.flags.png}" class="flag" alt="Bandera de ${pais.name.common}"></td>
+            <td><strong>${pais.name.common}</strong></td>
+            <td>${capital}</td>
+            <td>${pais.population.toLocaleString()}</td>
+            <td>${moneda}</td>
+            <td>${idioma}</td>
+          </tr>
+        `;
+        tableBody.innerHTML += fila;
+      });
+    }
+
+    // Filtrar países por nombre
+    searchInput.addEventListener("input", e => {
+      const texto = e.target.value.toLowerCase();
+      const filtrados = countriesData.filter(p =>
+        p.name.common.toLowerCase().includes(texto)
+      );
+      mostrarPaises(filtrados);
+    });
+
+    cargarPaises();
+  </script>
+</body>
+</html>
