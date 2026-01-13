@@ -1,0 +1,33 @@
+import React from 'react';
+const TablaMultiplicar = ({ numeroBase, limite }) => {
+  // Validación básica para números positivos
+  if (!numeroBase || !limite || numeroBase <= 0 || limite <= 0) {
+    return (
+      <div className="tabla-multiplicar">
+        <p className="error">Por favor ingresa dos números positivos válidos.</p>
+      </div>
+    )
+  }
+  const multiplicaciones = [];
+  for (let i = 1; i <= limite; i++) {
+    multiplicaciones.push({
+      multiplicando: i,
+      resultado: numeroBase * i
+    })
+  }
+  return (
+    <div className="tabla-multiplicar">
+      <h3>Tabla del {numeroBase} </h3>
+      <div className="tabla-container">
+        {multiplicaciones.map(({ multiplicando, resultado }) => (
+          <div key={multiplicando} className="fila-multiplicacion">
+            <span className="operacion">{numeroBase} × {multiplicando}</span>
+            <span className="igual">=</span>
+            <span className="resultado">{resultado}</span>
+          </div>
+        ))}
+      </div>
+ </div>
+  )
+}
+export default TablaMultiplicar;
