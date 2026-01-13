@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domino</title>
+
+    <style>
+  
+        .container{
+            border-style: solid;
+            width: 35%;
+            max-width: 230px;
+            background-color: white;
+        }
+        .container, .izquierda, .derecha{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .derecha{
+            border-left-style: solid;
+        }
+        .izquierda, .derecha{
+            height: 120px;
+            align-items: center;
+            justify-items: center;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+        .punto{
+            height: 30px;
+            width: 30px;
+            background-color: black;
+            border-radius: 50%;
+        }
+        .c1{
+            display: grid;
+            align-items: center;
+            justify-items: center;
+            grid-template-columns: 1fr;
+            height: 110px;
+        }
+        .c2{
+            display: grid;
+            align-items: center;
+            justify-items: center;
+            grid-template-columns: 1fr;
+            height: 110%;
+        }
+        .c3{
+            display: grid;
+            align-items: center;
+            justify-items: center;
+            grid-template-columns: 1fr;
+            height: 110px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="izquierda">
+            <div class="c1">
+                <div class="punto"></div>
+                <div class="punto"></div>
+            </div>
+            <div class="c1">
+                <div class="punto"></div>
+            </div>
+         
+            <div class="c1">
+                <div class="punto"></div>
+                <div class="punto"></div>
+            </div>
+        </div>
+
+        <div class="derecha">
+            <div class="c1">
+                <div class="punto"></div>
+            </div>
+        </div>
+    </div>
+
+  
+    <div class="container">
+        <div class="izquierda">
+    
+            <div class="c1">
+                <div class="punto"></div>
+                <div class="punto"></div>
+            </div>
+            <div class="c1"></div>
+            <div class="c1">
+                <div class="punto"></div>
+                <div class="punto"></div>
+            </div>
+        </div>
+
+        <div class="derecha">
+            <div class="c1">
+                <div class="punto"></div>
+            </div>
+
+              <div class="c1">
+                <div class="punto"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="izquierda">
+            <div class="c1">
+                <div class="punto"></div>
+                <div class="punto"></div>
+            </div>
+            <div class="c1">
+                <div class="punto"></div>
+                <div class="punto"></div>
+            </div>
+            <div class="c1">
+                <div class="punto"></div>
+                <div class="punto"></div>
+            </div>
+        </div>
+
+        <div class="derecha">
+            <div class="c1">
+                <div class="punto"></div>
+            </div>
+            <div class="c1">
+                <div class="punto"></div>
+            </div>
+            <div class="c1">
+                <div class="punto"></div>
+            </div>
+        </div>
+    </div>
+
+  
+    <div class="container">
+        <div class="izquierda">
+            <div class="c1">
+                <div class="punto"></div>
+                <div class="punto"></div>
+            </div>
+            <div class="c1"></div>
+            <div class="c1">
+                <div class="punto"></div>
+                <div class="punto"></div>
+            </div>
+        </div>
+
+        <div class="derecha">
+            <div class="c1">
+                <div class="punto"></div>
+            </div>
+            <div class="c1">
+                <div class="punto"></div>
+            </div>
+            <div class="c1">
+                <div class="punto"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
